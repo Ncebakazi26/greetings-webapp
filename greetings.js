@@ -26,7 +26,7 @@ module.exports= function greetings(existingNames) {
             name = name.charAt(0).toUpperCase() + name.slice(1);
             setName(name)
             if (language === 'English') {
-                return "Hello " + languagename;
+                return "Hello " + name;
 
             }
             if (language === 'isiXhosa') {

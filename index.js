@@ -25,25 +25,21 @@ app.get('/', function(req, res){
         });
    
 });
-app.post('/', function(req, res){
-    res.render('index',{
-        message: "Molo Thabang"
-        });
-        console.log(req.body)
-   
+
+app.post('/', function (req, res) {
+    const name = req.body.userName;
+    const language = req.body.language
+
+    const message = greet.language(name, language);
+
+    console.log({message});
+
+    res.render('index', {
+        message
+    });
+    
+
 });
-
-
-// app.post('/greeting',function(req,res){
-//     greet.setName({
-//         userName: req.body.userName
-//     });
-//     console.log(greet.getNames())
-  
-//     greet.language(req.body.language)
-//     res.redirect('/');
-
-// });
 
 
 let PORT = process.env.PORT || 3007;
