@@ -21,14 +21,16 @@ app.use(bodyParser.json())
 
 app.get('/', function(req, res){
     res.render('index',{
-       // nameGreeted:greet.getNames()
+        
         });
    
 });
 
-app.post('/', function (req, res) {
+app.post('/greet', function (req, res) {
     const name = req.body.userName;
     const language = req.body.language
+    console.log(name)
+    console.log(language)
 
     const message = greet.language(name, language);
 
@@ -40,10 +42,7 @@ app.post('/', function (req, res) {
     
 
 });
-
-
 let PORT = process.env.PORT || 3007;
-
 app.listen(PORT, function(){
 console.log("app started", PORT)
 });

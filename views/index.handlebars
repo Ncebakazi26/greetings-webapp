@@ -1,47 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/css/simple-grid.css">
 </head>
+
 <body>
     <div class="container">
         <div class="row1">
-        <div class="row header">
-        <h1>Please enter your name and choose a language you would like to be greeted with.</h1>
-        </div>
-        <div class="col-12">
-            <h2 class="greetName">{{message}}</h2>
-        </div>
-        <div class="col-12">
-            <h2 class="error-message"></h2>
-        </div>
-        <form action="/" method="POST">
-        <div class="box">
-     
-                 <input id="form"  type="text" placeholder="name here" required  pattern="[a-zA-Z]" title="Please enter A-Z" class="nameText" name="userName"></input>
-                 <h3><label for="counter"></label>Counter:</label> <span class="counter"></span></h3>
-                  
-       
-        </div>
-            <div class="col-12">
-                
-                    <input type="radio" id="English"   class = "lang"name="language" value="English">
-                    <label for="Eng">English</label>
-                    <input type="radio" id="isiXhosa" class="lang" name="language" value="isiXhosa">
-                    <label for="Xho">IsiXhosa</label>
-                    <input type="radio" id="Sepedi" class="lang" name="language" value="Sepedi">
-                    <label for="Spedi">Sepedi</label><br>     
+            <div class="row header">
+                <h1>Please enter your name and choose a language you would like to be greeted with.</h1>
             </div>
-            <button class="greet" type="submit" form="form2" >Greet!</button>
-            <button class="button" id="btn"  value="submit">Reset</button>
-            </form>
-            
+            <div class="col-12">
+                <h2 class="greetName">{{message}}</h2>
+            </div>
+            {{!-- <div class="col-12">
+          <h1> {{messages.info}}</h1>
+      </div> --}}
         </div>
+        <form action="/greet" method="POST">
+            <div class="box">
+
+                <input id="form" type="text" placeholder="name here" 
+                    title="Please enter A-Z" class="nameText" name="userName"></input>
+                <h3><label for="counter"></label>Counter:</label> <span class="counter"></span></h3>
+
+
+            </div>
+            <div class="col-12">
+
+                <input type="radio" id="English" class="lang" name="language" value="English">
+                <label for="Eng">English</label>
+                <input type="radio" id="isiXhosa" class="lang" name="language" value="isiXhosa">
+                <label for="Xho">IsiXhosa</label>
+                <input type="radio" id="Sepedi" class="lang" name="language" value="Sepedi">
+                <label for="Spedi">Sepedi</label><br>
+            </div>
+            <button class="greet" type="submit">Greet!</button>
+            <button class="button" id="btn" value="submit">Reset</button>
+        </form>
+
+
+    </div>
     </div>
 
 </body>
+
 </html>
-        
+{{!-- required pattern="[a-zA-Z]" --}}

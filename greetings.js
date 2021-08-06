@@ -43,13 +43,14 @@ module.exports= function greetings(existingNames) {
         
        
     }
+   
 
     function counter() {
         var getCounter = Object.keys(greetObj)
         return getCounter.length
     }
   
-    function messages1(name, language) {
+    function errormessages(name, language) {
 
         if (name !== "" && language===undefined ) {
             
@@ -77,7 +78,7 @@ return {
     setName,
     language,
     counter,
-    messages1,
+    errormessages,
     getNames,
     message2,
     message3
