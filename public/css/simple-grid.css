@@ -16,7 +16,7 @@ body {
   left: 0;
   top: 0;
   font-size: 100%;
-  background-color: cadetblue;
+  background-color: gold;
 }
 
 /* ROOT FONT STYLES */
@@ -294,11 +294,13 @@ font-size: 30px;
   width:300px; 
   margin-top: 25px; 
 }
+
 .button{
   margin-top: 50px;
   font-size: 30px;
   width:300px;  
 }
+
 .counter{
   font-size: 50px;
   color: brown;
@@ -321,4 +323,8 @@ h3{
 }
 label{
   font-size: 25px;
+}
+h1{
+  text-decoration-line: underline;
+  color: fuchsia;
 }

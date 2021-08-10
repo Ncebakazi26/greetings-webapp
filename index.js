@@ -29,15 +29,20 @@ app.get('/', function(req, res){
 app.post('/greet', function (req, res) {
     const name = req.body.userName;
     const language = req.body.language
-    console.log(name)
-    console.log(language)
+    
 
     const message = greet.language(name, language);
 
     console.log({message});
 
+    //const count=greet.counter()
+    //console.log({count})
+
+
+
     res.render('index', {
-        message
+        message,
+        count:greet.counter()
     });
     
 
