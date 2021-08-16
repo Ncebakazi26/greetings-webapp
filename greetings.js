@@ -2,17 +2,22 @@ module.exports= function greetings(existingNames) {
     var regex = /[0-9]/;
 
     var greetObj = existingNames || {}
-
     function setName(name) {
         if (!name.match(regex)) {
             name = name.charAt(0).toUpperCase() + name.slice(1);
             if (greetObj[name] === undefined) {
-                greetObj[name] = 0;
+                greetObj[name] =1;
+              
+            }
+            else{
+                greetObj[name]++;
+    
             }
         }
     }
     function getNames() {
         return greetObj
+
     }
 
     function language(name, language) {
@@ -44,13 +49,12 @@ module.exports= function greetings(existingNames) {
        
     }
    
-
     function counter() {
         var getCounter = Object.keys(greetObj)
         return getCounter.length
     }
   
-    function errormessages(name, language) {
+    function message1(name, language) {
 
         if (name !== "" && language===undefined ) {
             
@@ -58,16 +62,16 @@ module.exports= function greetings(existingNames) {
         }
     
     }
-    function message2(name, langauge) {
+    function message2(name, language) {
 
-        if (name == "" && langauge) {
+        if (name == "" && language) {
             return "Please enter your name first" 
         }
     
     }
-    function message3(name, langauge) {
+    function message3(name, language) {
         
-        if (name == "" &&langauge===undefined) {
+        if (name == "" &&language===undefined) {
           
         return "Please enter your name and choose language"
         }
@@ -78,7 +82,7 @@ return {
     setName,
     language,
     counter,
-    errormessages,
+    message1,
     getNames,
     message2,
     message3
