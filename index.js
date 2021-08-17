@@ -39,20 +39,22 @@ app.get('/', function (req, res) {
 });
 
 app.post('/greet', function (req, res) {
+    var message = ""
     const name = req.body.userName;
     const language = req.body.language
-   
-    if (name == "" && language ) {
+   if(name){
+    message = greet.language(name, language);
+    
+    console.log({ message });
+   }
+    else {
         req.flash('error', 'Please enter your name first');
         }
-
-        const message = greet.language(name, language);
-        console.log({ message });
-
         res.render('index', {
             message,
             count: greet.counter()
         });
+     
 
 });
 app.get('/listName', function (req, res) {
