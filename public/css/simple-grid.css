@@ -333,8 +333,8 @@ h1{
   width:100px; 
   border-radius: 60px; 
   margin-top: 10px;
-  margin-right: 1000px;
- 
-  
-  
+  /* margin-right: 1000px; */
 }
+/* .buttons{
+  display: flex;
+} */
