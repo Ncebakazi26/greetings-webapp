@@ -38,11 +38,11 @@ app.get('/', function (req, res) {
    
 });
 
-app.post('/greet', function (req, res) {
+app.post('/', function (req, res) {
     var message = ""
     const name = req.body.userName;
     const language = req.body.language
-   if(name){
+   if(name&&language){
     message = greet.language(name, language);
     
     console.log({ message });
@@ -67,7 +67,8 @@ app.get('/listName/:userName', function (req, res) {
     const listOfNames = greet.getNames()
     res.render('counter', {
         personsName: name,
-        personsCounter: listOfNames[name]
+        personsCounter: listOfNames[name],
+        personCount: listOfNames[name]>1
 
 
     });

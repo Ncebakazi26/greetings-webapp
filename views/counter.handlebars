@@ -1,3 +1,15 @@
+<div>
+    <button  class="btn"><a href="http://localhost:3007/listName">
+    back
+    </a>
+</button>
+</div>
 <h1>A message for greeted name/s</h1>
-<h3>Hello, {{personsName}} has been greeted {{personsCounter}} time/s</h3>
+
+{{#if personCount}}
+<h3>Hello, {{personsName}} has been greeted {{personsCounter}} times</h3>
+{{else}}
+<h3>Hello, {{personsName}} has been greeted {{personsCounter}} time</h3>
+{{/if}}
+
 

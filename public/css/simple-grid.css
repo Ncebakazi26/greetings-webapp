@@ -328,3 +328,13 @@ h1{
   text-decoration-line: underline;
   color: fuchsia;
 }
+.btn{
+  font-size: 25px;
+  width:100px; 
+  border-radius: 60px; 
+  margin-top: 10px;
+  margin-right: 1000px;
+ 
+  
+  
+}
