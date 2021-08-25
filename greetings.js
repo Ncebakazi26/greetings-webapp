@@ -1,42 +1,44 @@
-module.exports= function greetings(existingNames, pool) {
-    async function displayNames(){
-     let users = await pool ('SELECT * from users');
-     return users.rows;  
-    }
+
+module.exports= function greetings(pool) {
+    // async function displayNames(){
+    //  let users = await pool ('SELECT * from users');
+    //  return users.rows;  
+    // }
     async function addNames(name){
         let data = [
             name
         ];
-     try {
+     //try {
         let results = await pool.query(`insert into users (name,counter)  
-        values ($1, 1)
-        returning id, name`, data);
+        values ($1, 1)`
+       , data);
     return results.rows[0]
          
-     } catch (error) {
-         console.log(error)
+    //  } catch (error) {
+    //      console.log(error)
          
-     }
+    //  }
     }
-    
     var regex = /[0-9]/;
-    var greetObj = existingNames || {}
-    function setName(name) {
-        if (!name.match(regex)) {
-            name = name.charAt(0).toUpperCase() + name.slice(1);
-            if (greetObj[name] === undefined) {
-                greetObj[name] =1;
-              
-            }
-            else{
-                greetObj[name]++;
     
-            }
-        }
+    async function findAllNames() {
+        const sql = `select * from users`;
+        const results = await pool.query(sql);
+        return results.rows
     }
-    function getNames() {
-        return greetObj
 
+    async function updateCounter(name) {
+        const sql = `update users set counter = counter + 1 where name = $1`;
+        await pool.query(sql, [name]);
+    }
+
+    async function getName(name) {
+        const sql = `select * from users where name = $1`;
+        const result = await pool.query(sql, [name]);
+        if (result.rows.length > 0) {
+            return result.rows[0];
+        } 
+        return null;
     }
 
   async function language(name, language) {
@@ -48,7 +50,12 @@ module.exports= function greetings(existingNames, pool) {
         else  {
           
             name = name.charAt(0).toUpperCase() + name.slice(1);
-           await addNames(name)
+            const isNameExist = await getName(name); // a name or null 
+            if(isNameExist) {
+                await updateCounter(name);
+            } else {
+                await addNames(name);
+            }
             if (language === 'English') {
                 return "Hello " + name;
 
@@ -60,17 +67,13 @@ module.exports= function greetings(existingNames, pool) {
             if (language === 'Sepedi') {
                 return "Dumela " + name;
 
-            }
-            
-        }
-
-        
-       
+            }   
+        }   
     }
    
-    function counter() {
-        var getCounter = Object.keys(greetObj)
-        return getCounter.length
+    async function counter() {
+        const count = await findAllNames();
+        return count.length;
     }
   
     function message1(name, language) {
@@ -98,16 +101,16 @@ module.exports= function greetings(existingNames, pool) {
 
 
 return {
-    setName,
+    setName: () => true,
     language,
     counter,
     message1,
-    getNames,
+    getNames: findAllNames,
     message2,
     message3,
-    displayNames,
-    addNames
+   // displayNames,
+    addNames,
+    getName
     
 }
 }
-

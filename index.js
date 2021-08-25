@@ -1,3 +1,4 @@
+
 const express = require("express");
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
@@ -9,9 +10,11 @@ const Pool = pg.Pool;
 
 const connectionString = process.env.DATABASE_URL || 'postgresql://codex:pg123@localhost:5432/user';
 
-
+const pool = new Pool({
+    connectionString,
+});
 const app = express()
-const greet = greetings()
+const greet = greetings(pool)
 const handlebarSetup = exphbs({
     partialsDir: "./views/partials",
     viewPath: './views',
@@ -48,32 +51,36 @@ app.post('/', async function (req, res) {
     const name = req.body.userName;
     const language = req.body.language
     if (name && language) {
-        message = await greet.language(name, language);
+        message = await greet.language(name, language); // add or update the counter and return a message : Hello, world!
 
         console.log({ message });
     }
     else {
         req.flash('error', 'Please enter your name first');
     }
+
+    const count = await greet.counter();
+
     res.render('index', {
         message,
-        count: greet.counter()
+        count
     });
 
 
 });
-app.get('/listName', function (req, res) {
-    res.render('listName', { listName: greet.getNames() })
+app.get('/listName', async function (req, res) {
+    res.render('listName', { listName: await greet.getNames() })
 
 });
 
-app.get('/listName/:userName', function (req, res) {
+app.get('/listName/:userName', async function (req, res) {
     const name = req.params.userName
-    const listOfNames = greet.getNames()
+    const listOfNames = await greet.getName(name)
+    console.log(listOfNames);
     res.render('counter', {
         personsName: name,
-        personsCounter: listOfNames[name],
-        personCount: listOfNames[name] > 1
+        personsCounter: listOfNames.counter,
+        personCount: listOfNames.counter > 1
 
 
     });
