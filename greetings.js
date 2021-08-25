@@ -1,6 +1,25 @@
-module.exports= function greetings(existingNames) {
+module.exports= function greetings(existingNames, pool) {
+    async function displayNames(){
+     let users = await pool ('SELECT * from users');
+     return users.rows;  
+    }
+    async function addNames(name){
+        let data = [
+            name
+        ];
+     try {
+        let results = await pool.query(`insert into users (name,counter)  
+        values ($1, 1)
+        returning id, name`, data);
+    return results.rows[0]
+         
+     } catch (error) {
+         console.log(error)
+         
+     }
+    }
+    
     var regex = /[0-9]/;
-
     var greetObj = existingNames || {}
     function setName(name) {
         if (!name.match(regex)) {
@@ -20,7 +39,7 @@ module.exports= function greetings(existingNames) {
 
     }
 
-    function language(name, language) {
+  async function language(name, language) {
 
         if(name.match(regex)){
             return  "Please enter letters only"
@@ -29,7 +48,7 @@ module.exports= function greetings(existingNames) {
         else  {
           
             name = name.charAt(0).toUpperCase() + name.slice(1);
-            setName(name)
+           await addNames(name)
             if (language === 'English') {
                 return "Hello " + name;
 
@@ -85,7 +104,9 @@ return {
     message1,
     getNames,
     message2,
-    message3
+    message3,
+    displayNames,
+    addNames
     
 }
 }

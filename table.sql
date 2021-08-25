@@ -1,7 +1,9 @@
--- create table categories(
--- 	id serial not null primary key,
--- 	description text not null
--- );
+ create table user(
+	id serial not null primary key,
+	name text not null
+    counter int
+
+ );
 
 -- create table products (
 -- 	id serial not null primary key,
@@ -12,4 +14,4 @@
 -- );
 
 
-create table cats (id serial primary key, user_name text not null, user_count int not null);
+-- create table users (id serial primary key, name text not null, count int not null);

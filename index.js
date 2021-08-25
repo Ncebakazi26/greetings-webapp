@@ -1,9 +1,14 @@
 const express = require("express");
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
-const session = require('express-session')
+const session = require('express-session');
 const flash = require('express-flash');
 const greetings = require('./greetings');
+const pg = require("pg");
+const Pool = pg.Pool;
+
+const connectionString = process.env.DATABASE_URL || 'postgresql://codex:pg123@localhost:5432/user';
+
 
 const app = express()
 const greet = greetings()
@@ -31,30 +36,30 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 app.get('/', function (req, res) {
-    
- res.render('index', {
-   
+
+    res.render('index', {
+
     });
-   
+
 });
 
-app.post('/', function (req, res) {
+app.post('/', async function (req, res) {
     var message = ""
     const name = req.body.userName;
     const language = req.body.language
-   if(name&&language){
-    message = greet.language(name, language);
-    
-    console.log({ message });
-   }
+    if (name && language) {
+        message = await greet.language(name, language);
+
+        console.log({ message });
+    }
     else {
         req.flash('error', 'Please enter your name first');
-        }
-        res.render('index', {
-            message,
-            count: greet.counter()
-        });
-     
+    }
+    res.render('index', {
+        message,
+        count: greet.counter()
+    });
+
 
 });
 app.get('/listName', function (req, res) {
@@ -68,26 +73,12 @@ app.get('/listName/:userName', function (req, res) {
     res.render('counter', {
         personsName: name,
         personsCounter: listOfNames[name],
-        personCount: listOfNames[name]>1
+        personCount: listOfNames[name] > 1
 
 
     });
 
 });
-// app.get('/', function (req, res) {
-//     const name = req.body.userName;
-//     const language = req.body.language
-   
-//     res.redirect('/');
-//     if (name !== "" && language===undefined ) {
-//     req.flash('error', 'Please choose a language');
-//     }
-//     if (name == "" &&language===undefined) {
-//     req.flash('error', 'Please enter your name and choose language');   
-//     }
-
-// });
-
 let PORT = process.env.PORT || 3007;
 app.listen(PORT, function () {
     console.log("app started", PORT)
