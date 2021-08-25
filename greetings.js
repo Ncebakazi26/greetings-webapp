@@ -8,16 +8,16 @@ module.exports= function greetings(pool) {
         let data = [
             name
         ];
-     //try {
+     try {
         let results = await pool.query(`insert into users (name,counter)  
         values ($1, 1)`
        , data);
     return results.rows[0]
          
-    //  } catch (error) {
-    //      console.log(error)
+     } catch (error) {
+         console.log(error)
          
-    //  }
+     }
     }
     var regex = /[0-9]/;
     
