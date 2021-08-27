@@ -48,7 +48,7 @@ module.exports= function greetings(pool) {
     }
 
   async function language(name, language) {
-      try {
+      //try {
         if(name.match(regex)){
             return  "Please enter letters only"
             
@@ -75,9 +75,9 @@ module.exports= function greetings(pool) {
 
             }   
         }   
-      } catch (error) {
-          console.log(error)
-      }
+    //   } catch (error) {
+    //       console.log(error)
+    //   }
 
        
     }
