@@ -1,4 +1,4 @@
-
+'use strict';
 const express = require("express");
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
@@ -58,6 +58,9 @@ app.post('/', async function (req, res) {
     else {
         req.flash('error', 'Please enter your name first');
     }
+    res.json({
+        status: 'success'
+    });
 
     const count = await greet.counter();
 

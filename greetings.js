@@ -10,8 +10,8 @@ module.exports= function greetings(pool) {
         ];
      try {
         let results = await pool.query(`insert into users (name,counter)  
-        values ($1, 1)`
-       , data);
+        values ($1, 1)
+       returning id,name,counter`, data);
     return results.rows[0]
          
      } catch (error) {
