@@ -46,7 +46,7 @@ app.get('/', function (req, res) {
 
 });
 
-app.post('/', async function (req, res) {
+app.post('/greet', async function (req, res) {
     var message = ""
     const name = req.body.userName;
     const language = req.body.language
