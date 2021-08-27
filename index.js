@@ -47,6 +47,7 @@ app.get('/', function (req, res) {
 });
 
 app.post('/greet', async function (req, res) {
+   try {
     var message = ""
     const name = req.body.userName;
     const language = req.body.language
@@ -58,18 +59,17 @@ app.post('/greet', async function (req, res) {
     else {
         req.flash('error', 'Please enter your name first');
     }
-    // res.json({
-    //     status: 'success'
-    // });
-
+   
     const count = await greet.counter();
 
     res.render('index', {
         message,
         count
     });
-
-
+       
+   } catch (error) {
+       console.log(error);
+   }
 });
 app.get('/listName', async function (req, res) {
     res.render('listName', { listName: await greet.getNames() })
