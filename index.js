@@ -72,11 +72,18 @@ app.post('/greet', async function (req, res) {
    }
 });
 app.get('/listName', async function (req, res) {
-    res.render('listName', { listName: await greet.getNames() })
+    try {
+        res.render('listName', { listName: await greet.getNames() })
+        
+    } catch (error) {
+        console.log(error)
+    }
+   
 
 });
 
 app.get('/listName/:userName', async function (req, res) {
+  try {
     const name = req.params.userName
     const listOfNames = await greet.getName(name)
     console.log(listOfNames);
@@ -84,9 +91,10 @@ app.get('/listName/:userName', async function (req, res) {
         personsName: name,
         personsCounter: listOfNames.counter,
         personCount: listOfNames.counter > 1
-
-
     });
+  } catch (error) {
+      console.log(error)
+  }
 
 });
 let PORT = process.env.PORT || 3007;
