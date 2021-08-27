@@ -58,9 +58,9 @@ app.post('/', async function (req, res) {
     else {
         req.flash('error', 'Please enter your name first');
     }
-    res.json({
-        status: 'success'
-    });
+    // res.json({
+    //     status: 'success'
+    // });
 
     const count = await greet.counter();
 
