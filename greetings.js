@@ -22,33 +22,39 @@ module.exports= function greetings(pool) {
     var regex = /[0-9]/;
     
     async function findAllNames() {
-    
+      try {
         const sql = `select * from users`;
         const results = await pool.query(sql);
         return results.rows
-     
+      } catch (error) {
+         console.log(error) 
+      }
     }
 
     async function updateCounter(name) {
-    
+        try {
             const sql = `update users set counter = counter + 1 where name = $1`;
         await pool.query(sql, [name]);
-       
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     async function getName(name) {
-       
+       try {
         const sql = `select * from users where name = $1`;
         const result = await pool.query(sql, [name]);
         if (result.rows.length > 0) {
             return result.rows[0];
         } 
         return null;
-       
+       } catch (error) {
+          console.log(error) 
+       }
     }
 
   async function language(name, language) {
-      //try {
+      try {
         if(name.match(regex)){
             return  "Please enter letters only"
             
@@ -75,16 +81,20 @@ module.exports= function greetings(pool) {
 
             }   
         }   
-    //   } catch (error) {
-    //       console.log(error)
-    //   }
+      } catch (error) {
+          console.log(error)
+      }
 
        
     }
    
     async function counter() {
+       try {
         const count = await findAllNames();
-        return count.length;  
+        return count.length;
+       } catch (error) {
+          console.log(error) 
+       }
     }
   
     function message1(name, language) {
