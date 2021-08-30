@@ -72,8 +72,12 @@ app.post('/', async function (req, res) {
    }
 });
 app.get('/listName', async function (req, res) {
-    
+    try {
         res.render('listName', { listName: await greet.getNames() })
+    } catch (error) {
+        console.log(error)
+    }
+     
 
 });
 
