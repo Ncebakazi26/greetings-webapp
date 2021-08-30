@@ -291,14 +291,19 @@ font-size: 30px;
 }
 .greet{
   font-size: 30px;
-  width:300px; 
+  width:200px; 
   margin-top: 25px; 
+  border-radius: 60px;
+ background-color: lavender
 }
 
 .button{
   margin-top: 50px;
   font-size: 30px;
-  width:300px;  
+  width:200px;  
+  border-radius: 60px;
+  margin-left: 20px;
+  background-color: lavender;
 }
 
 .counter{
@@ -333,8 +338,6 @@ h1{
   width:100px; 
   border-radius: 60px; 
   margin-top: 10px;
-  /* margin-right: 1000px; */
+
 }
-/* .buttons{
-  display: flex;
-} */
+

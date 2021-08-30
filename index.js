@@ -59,15 +59,15 @@ app.post('/', async function (req, res) {
     else {
         req.flash('error', 'Please enter your name first');
     }
-   
-    const count = await greet.counter();
 
+    const count = await greet.counter();
+   
     res.render('index', {
         message,
         count
     });
-       
-   } catch (error) {
+} 
+    catch (error) {
        console.log(error);
    }
 });
@@ -78,7 +78,7 @@ app.get('/listName', async function (req, res) {
 });
 
 app.get('/listName/:userName', async function (req, res) {
- 
+   try {
     const name = req.params.userName
     const listOfNames = await greet.getName(name)
     console.log(listOfNames);
@@ -87,6 +87,10 @@ app.get('/listName/:userName', async function (req, res) {
         personsCounter: listOfNames.counter,
         personCount: listOfNames.counter > 1
     });
+   } catch (error) {
+       console.log(error)
+   } 
+   
 });
 let PORT = process.env.PORT || 3007;
 app.listen(PORT, function () {
