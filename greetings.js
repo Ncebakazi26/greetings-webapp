@@ -96,7 +96,14 @@ module.exports= function greetings(pool) {
           console.log(error) 
        }
     }
-  
+  async function restart(){
+      
+    const reset = await pool.query(`delete from users`);
+    return reset.row;
+    //const results = await pool.query(sql);
+    
+      
+  }
     function message1(name, language) {
 
         if (name !== "" && language===undefined ) {
@@ -131,7 +138,8 @@ return {
     message3,
    // displayNames,
     addNames,
-    getName
+    getName,
+    restart
     
 }
 }

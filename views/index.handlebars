@@ -20,10 +20,11 @@
 
                 {{#if messages.error}}
                 <div class="Error">
+                    
                     <h2> {{messages.error}}</h2>
                 </div>
                 {{/if}}
-                <form action="/" method="POST">
+                <form action="/greet" method="POST">
                     <div class="box">
 
                         <input id="form" type="text" placeholder="name here" title="Please enter A-Z" class="nameText"
@@ -43,7 +44,8 @@
                         <label for="Spedi">Sepedi</label><br>
                     </div>
                     <button class="greet" type="submit">Greet!</button>
-                    <button class="button" id="btn" value="submit">Reset</button>
+                    <a href="/resetbtn"> <button class="button" type="button" id="btn" value="reset">Reset</button></a>
+                   
 
                 </form>
                 <h2><a href="/listName">Link to Names</a></h2>
