@@ -33,8 +33,7 @@ const handlebarSetup = exphbs({
 app.use(session({
     secret: "Error messages",
     resave: false,
-    saveUninitialized: false,
-    //cookie:{minAge : 10000}
+    saveUninitialized: true,
 }));
 
 // initialise the flash middleware
