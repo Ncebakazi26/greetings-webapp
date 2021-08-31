@@ -25,7 +25,12 @@ module.exports= function greetings(pool) {
       try {
         const sql = `select * from users`;
         const results = await pool.query(sql);
-        return results.rows
+        // results can be undefined if there is nothing in the database...
+        if (results) {
+            return results.rows
+        } else {
+            return [];
+        }
       } catch (error) {
          console.log(error) 
       }
@@ -99,7 +104,7 @@ module.exports= function greetings(pool) {
   async function restart(){
       
     const reset = await pool.query(`delete from users`);
-    return reset.row;
+    return reset.rows
     //const results = await pool.query(sql);
     
       
