@@ -10,6 +10,7 @@ const pg = require("pg");
 const Pool = pg.Pool;
 // should we use a SSL connection
 let useSSL = false;
+
 let local = process.env.LOCAL || false;
 if (process.env.DATABASE_URL && !local){
     useSSL = true;
@@ -19,7 +20,9 @@ const connectionString = process.env.DATABASE_URL || 'postgresql://codex:pg123@l
 
 const pool = new Pool({
     connectionString,
-    ssl : useSSL
+    ssl : {
+        rejectUnauthorized : false
+    }
   });
 
 const app = express()
