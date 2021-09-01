@@ -5,6 +5,9 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const flash = require('express-flash');
 const greetings = require('./greetings');
+//const Routs = require("./greetings-routes")
+
+
 const pg = require("pg");
 // const { Cookie } = require("express-session");
 const Pool = pg.Pool;
@@ -27,6 +30,8 @@ const pool = new Pool({
 
 const app = express()
 const greet = greetings(pool)
+//const greetingsRoutes = Routs(greet)
+
 const handlebarSetup = exphbs({
     partialsDir: "./views/partials",
     viewPath: './views',
@@ -60,7 +65,7 @@ app.get('/', async function (req, res) {
 
 });
 
-app.post('/greet', async function (req, res) {
+app.post('/greet',  async function (req, res) {
     try {
         var message = ""
         const name = req.body.userName;
@@ -69,10 +74,20 @@ app.post('/greet', async function (req, res) {
             message = await greet.language(name, language); // add or update the counter and return a message : Hello, world!
 
             console.log({ message });
+        } 
+        if  (name == "" && language===undefined ){
+            req.flash('error', 'Please enter your name and choose language')
         }
-        else {
+        if (name !== "" && language===undefined ) {
+            
+            req.flash('error','Please choose a language')   
+            }
+
+        else if (name =="" && language){
             req.flash('error', 'Please enter your name first');
         }
+
+        
 
         const count = await greet.counter();
 console.log(count)
