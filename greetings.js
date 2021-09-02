@@ -11,12 +11,12 @@ module.exports= function greetings(pool) {
      try {
         let results = await pool.query(`insert into users (name,counter)  
         values ($1, 1)
-       returning id,name,counter`, data);
+       returning name,counter`, data);
+       console.log(results.rows[0])
     return results.rows[0]
          
      } catch (error) {
-         console.log(error)
-         
+         console.log(error)         
      }
     }
     var regex = /[0-9]/;
@@ -58,7 +58,11 @@ module.exports= function greetings(pool) {
        }
     }
 
-  async function language(name, language) {
+  async function language(par) {
+      var name = ''
+      var language = ''
+      name =  par.name;
+      language = par.language
       try {
         if(name.match(regex)){
             return  "Please enter letters only"

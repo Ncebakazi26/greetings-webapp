@@ -1,14 +1,13 @@
 language: node_js
 
+node_js:
+  - "12"
 env:
-  - DATABASE_URL='postgresql://codex:pg123@localhost:5432/greetings_tests
-
-node_js:  
-  - "8.9.4"
+  - DATABASE_URL='postgresql://postgres@localhost:5432/user
 
 before_script:
-  - psql -c 'create database greetings_tests ;' -U postgres
-  - psql -U postgres -d greetings_tests -a -f table.sql
+  - psql -c 'create database user ;' -U postgres
+  - psql -U postgres -d user -a -f table.sql
 
 services:
   - postgresql

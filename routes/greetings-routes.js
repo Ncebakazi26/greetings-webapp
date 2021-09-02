@@ -12,7 +12,10 @@ module.exports = function greetingRoutes(greet) {
             const name = req.body.userName;
             const language = req.body.language
             if (name && language) {
-                message = await greet.language(name, language); // add or update the counter and return a message : Hello, world!
+                message = await greet.language({
+                    name: name,
+                    language: language
+                    }); // add or update the counter and return a message : Hello, world!
 
                 console.log({ message });
             }

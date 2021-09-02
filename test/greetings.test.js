@@ -35,42 +35,57 @@ describe('The basic database web app', function(){
     });
 
     it('should count how many names have been greeted', async function(){
-        await greet.language(" Hello Ncebakazi");
-        await greet.language("Molo Thato");
+        await greet.language({name:"Ncebakazi",language:"English"});
+        await greet.language({name:"Ishmael",language:"English"});
         let greetedNames = await greet.counter()
         assert.equal(2, greetedNames);
     });
     it('should greet the user in English', async function(){
-       // await greet.language(" Hello Ncebakazi");
-        //await greet.language("Molo Thato");
-       // let greetedNames = await greet.counter()
-        assert.equal('Hello, Ncebakazi',await greet.language({name:"Ncebakazi", language:"English"}));
+        assert.equal('Hello Ncebakazi',await greet.language({name:"Ncebakazi",language:"English"}));
     });
-    // it('should not increment counter if the same person is greeted twice', async function(){
+
+    it('should greet the user in isiXhosa', async function(){
+        assert.equal('Molo Ncebakazi',await greet.language({name:"Ncebakazi",language:"isiXhosa"}));
+    });
+
+    it('should greet the user in isiXhosa', async function(){
+        assert.equal('Dumela Ncebakazi',await greet.language({name:"Ncebakazi",language:"Sepedi"}));
+    });
+
+    it('should not increment counter if the same person is greeted twice', async function(){
+        //let greet = greetings(pool);
+        await greet.language({
+            name : "Ncebakazi"
+        });
+        await greet.language({
+            name : "Ncebakazi"
+        });
+        assert.equal(1,await greet.counter());
+    });
+    it('should return 2 for counter', async function(){
+        //let greet = greetings(pool);
+        await greet.language({
+            name : "Ncebakazi"
+        });
+        await greet.language({
+            name : "Ncebakazi"
+        });
+        await greet.language({
+            name : "Lutho"
+        });
+        assert.equal(2,await greet.counter());
+    });
+    // it('should return all the names in the db ', async function(){
     //     let greet = greetings(pool);
-    //     await greet.getName({
-    //         name : "Ncebakazi"
+    //     await greet.addNames({
+    //         name : "linamandla",
     //     });
-    //     await greet.getName({
-    //         name : "lutho"
-    //     });
-      
-    //     let greetedNames = await greet.updateCounter(2)
-    //     assert.equal(2, greetedNames);
+    //     // await greet.addNames({
+    //     //     name : "ntosh",
+    //     // });
+    //     let greetedNames = await greet.getNames()
+    //     assert.equal({ name: 'Linamandla', counter: 1 } , greetedNames);
     // });
-    it('should return all the names in the db ', async function(){
-        let greet = greetings(pool);
-        await greet.addNames({
-            name : "linamandla",
-           counter: 1
-        });
-        await greet.addNames({
-            name : "ntosh",
-            counter:1
-        });
-        let greetedNames = await greet.getNames()
-        assert.equal(["linamandla, ntosh"] , greetedNames);
-    });
     after(function(){
         pool.end();
     })
