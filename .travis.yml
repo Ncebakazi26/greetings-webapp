@@ -4,7 +4,7 @@ node_js:
   - "12"
 
 env:
-  - DATABASE_URL=postgresql://codex:pg123@localhost:5432/user
+  - DATABASE_URL=postgresql://postgres@localhost:5432/user
 
 before_script:
   - psql -c 'create database user;' -U postgres
