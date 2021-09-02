@@ -4,11 +4,11 @@ node_js:
   - "12"
 
 env:
-  - DATABASE_URL=postgresql://postgres@localhost:5432/user
+  - DATABASE_URL=postgresql://postgres@localhost:5432/user_tests
 
 before_script:
-  - psql -c 'create database user' -U postgres
-  - psql -U postgres -d user -a -f table.sql
+  - psql -c 'create database user_tests' -U postgres
+  - psql -U postgres -d user_tests -a -f table.sql
 
 services:
   - postgresql
