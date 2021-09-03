@@ -1,5 +1,6 @@
 module.exports = function greetingRoutes(greet) {
-    const greetings = require('../greetings')
+
+    
     async function display(req, res) {
         const count = await greet.counter();
         res.render('index', {
@@ -31,7 +32,6 @@ module.exports = function greetingRoutes(greet) {
                 req.flash('error', 'Please enter your name first');
             }
             const count = await greet.counter();
-            console.log(count)
             res.render('index', {
                 message,
                 count
@@ -41,7 +41,7 @@ module.exports = function greetingRoutes(greet) {
             console.log(error);
         }
     }
-    async function showAll(req, res) {
+    async function showAll(req, res, ) {
         try {
             res.render('listName', { listName: await greet.getNames() })
         } catch (error) {

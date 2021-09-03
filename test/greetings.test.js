@@ -81,17 +81,18 @@ describe('The basic database web app', function(){
         });
         assert.equal(2,await greet.counter());
     });
-    // it('should return all the names in the db ', async function(){
-    //     let greet = greetings(pool);
-    //     await greet.addNames({
-    //         name : "linamandla",
-    //     });
-    //     // await greet.addNames({
-    //     //     name : "ntosh",
-    //     // });
-    //     let greetedNames = await greet.getNames()
-    //     assert.equal({ name: 'Linamandla', counter: 1 } , greetedNames);
-    // });
+   
+    it('should return all the names in the db ', async function(){
+        await greet.addNames({
+            name : "linamandla",
+        });
+        await greet.addNames({
+            name : "ntosh",
+        });
+        let greetedNames = await greet.returnAllNames()
+        assert.deepEqual(  [ { name: '{"name":"linamandla"}' },{ name: '{"name":"ntosh"}' } ] , greetedNames);
+      
+    });
     after(function(){
         pool.end();
     })

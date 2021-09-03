@@ -9,7 +9,6 @@ const Routes = require('./routes/greetings-routes')
 
 
 const pg = require("pg");
-// const { Cookie } = require("express-session");
 const Pool = pg.Pool;
 // should we use a SSL connection
 let useSSL = false;

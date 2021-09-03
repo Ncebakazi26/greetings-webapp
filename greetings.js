@@ -1,9 +1,6 @@
 
 module.exports= function greetings(pool) {
-    // async function displayNames(){
-    //  let users = await pool ('SELECT * from users');
-    //  return users.rows;  
-    // }
+   
     async function addNames(name){
         let data = [
             name
@@ -35,6 +32,20 @@ module.exports= function greetings(pool) {
          console.log(error) 
       }
     }
+    async function returnAllNames() {
+        try {
+          const sql = `select name from users`;
+          const results = await pool.query(sql);
+          // results can be undefined if there is nothing in the database...
+          if (results) {
+              return results.rows
+          } else {
+              return [];
+          }
+        } catch (error) {
+           console.log(error) 
+        }
+      }
 
     async function updateCounter(name) {
         try {
@@ -107,8 +118,7 @@ module.exports= function greetings(pool) {
     }
   async function restart(){ 
     const reset = await pool.query(`delete from users`);
-    return reset.rows
-    //const results = await pool.query(sql);   
+    return reset.rows 
   }
     function message1(name, language) {
 
@@ -145,7 +155,8 @@ return {
     addNames,
     getName,
     updateCounter,
-    restart
+    restart,
+    returnAllNames
     
 }
 }
