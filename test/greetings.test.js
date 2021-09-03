@@ -52,8 +52,15 @@ describe('The basic database web app', function(){
         assert.equal('Dumela Ncebakazi',await greet.language({name:"Ncebakazi",language:"Sepedi"}));
     });
 
+    it('should reject a number', async function(){
+        assert.equal('Please enter letters only',await greet.language({name:"21",language:"Sepedi"}));
+    });
+    it('should reject a special character', async function(){
+        assert.equal('Please enter letters only',await greet.language({name:"@",language:"Sepedi"}));
+    });
+
     it('should not increment counter if the same person is greeted twice', async function(){
-        //let greet = greetings(pool);
+       
         await greet.language({
             name : "Ncebakazi"
         });
@@ -63,7 +70,6 @@ describe('The basic database web app', function(){
         assert.equal(1,await greet.counter());
     });
     it('should return 2 for counter', async function(){
-        //let greet = greetings(pool);
         await greet.language({
             name : "Ncebakazi"
         });

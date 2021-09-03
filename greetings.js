@@ -12,14 +12,14 @@ module.exports= function greetings(pool) {
         let results = await pool.query(`insert into users (name,counter)  
         values ($1, 1)
        returning name,counter`, data);
-       console.log(results.rows[0])
     return results.rows[0]
          
      } catch (error) {
          console.log(error)         
      }
     }
-    var regex = /[0-9]/;
+    var regex = /[0-9`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/`]/;
+   // /[0-9 ~!@#$%^&*()_|+\-=?;:",.<>]/;
     
     async function findAllNames() {
       try {
