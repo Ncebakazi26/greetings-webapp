@@ -7,7 +7,7 @@ module.exports = function greetingRoutes(greet) {
             count
         });
     };
-    async function greetUser(req, res) {
+    async function greetUser(req, res, next) {
         try {
             var message = ""
             const name = req.body.userName;
@@ -38,17 +38,17 @@ module.exports = function greetingRoutes(greet) {
             });
         }
         catch (error) {
-            console.log(error);
+            next(error);
         }
     }
-    async function showAll(req, res, ) {
+    async function showAll(req, res, next) {
         try {
             res.render('listName', { listName: await greet.getNames() })
         } catch (error) {
-            console.log(error)
+            next(error)
         }
     }
-    async function summarySentence(req, res) {
+    async function summarySentence(req, res, next) {
         try {
             const name = req.params.userName
             const listOfNames = await greet.getName(name)
@@ -59,7 +59,7 @@ module.exports = function greetingRoutes(greet) {
                 personCount: listOfNames.counter > 1
             });
         } catch (error) {
-            console.log(error)
+            next(error)
         }
     }
     async function refresh(req, res) {
