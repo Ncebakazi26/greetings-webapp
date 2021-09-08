@@ -1,6 +1,4 @@
 module.exports = function greetingRoutes(greet) {
-
-    
     async function display(req, res) {
         const count = await greet.counter();
         res.render('index', {

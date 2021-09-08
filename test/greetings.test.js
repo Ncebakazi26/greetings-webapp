@@ -48,7 +48,7 @@ describe('The basic database web app', function(){
         assert.equal('Molo Ncebakazi',await greet.language({name:"Ncebakazi",language:"isiXhosa"}));
     });
 
-    it('should greet the user in isiXhosa', async function(){
+    it('should greet the user in Sepedi', async function(){
         assert.equal('Dumela Ncebakazi',await greet.language({name:"Ncebakazi",language:"Sepedi"}));
     });
 

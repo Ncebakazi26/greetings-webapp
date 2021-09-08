@@ -7,7 +7,7 @@ if(errorElem!==""){
     },2000)
 }
 reloadElem.addEventListener(click, function(){
-reloadElem.innerHTML = "Page have been reloadedmo"
+reloadElem.innerHTML = "Page have been reloaded"
 })
 
 

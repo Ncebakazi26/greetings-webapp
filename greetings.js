@@ -1,27 +1,23 @@
 
 module.exports= function greetings(pool) {
-   
+    var regex = /[0-9`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/`]/;
     async function addNames(name){
         let data = [
-            name
+            name   
         ];
      try {
         let results = await pool.query(`insert into users (name,counter)  
-        values ($1, 1)
-       returning name,counter`, data);
-    return results.rows[0]
+        values ($1, 1)`, data);
+    //return results.rows[0]
          
      } catch (error) {
          console.log(error)         
      }
     }
-    var regex = /[0-9`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/`]/;
-   // /[0-9 ~!@#$%^&*()_|+\-=?;:",.<>]/;
-    
+   
     async function findAllNames() {
       try {
-        const sql = `select * from users`;
-        const results = await pool.query(sql);
+        const results = await pool.query (`select * from users`);
         // results can be undefined if there is nothing in the database...
         if (results) {
             return results.rows
@@ -55,7 +51,6 @@ module.exports= function greetings(pool) {
             console.log(error)
         }
     }
-
     async function getName(name) {
        try {
         const sql = `select * from users where name = $1`;
@@ -120,38 +115,11 @@ module.exports= function greetings(pool) {
     const reset = await pool.query(`delete from users`);
     return reset.rows 
   }
-    function message1(name, language) {
-
-        if (name !== "" && language===undefined ) {
-            
-        return "Please choose a language"   
-        }
-    
-    }
-    function message2(name, language) {
-
-        if (name == "" && language) {
-            return "Please enter your name first" 
-        }
-    
-    }
-    function message3(name, language) {
-        
-        if (name == "" &&language===undefined) {
-          
-        return "Please enter your name and choose language"
-        }
-    }
-
 
 return {
-    setName: () => true,
     language,
     counter,
-    message1,
     getNames: findAllNames,
-    message2,
-    message3,
     addNames,
     getName,
     updateCounter,
